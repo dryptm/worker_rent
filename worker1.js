@@ -1,3 +1,4 @@
+//worker1
 const {
     parentPort,
     workerData
