@@ -1,12 +1,10 @@
+//worker1
 const {
     parentPort,
     workerData
 } = require("worker_threads");
 const puppeteer = require('puppeteer')
-
-
-parentPort.postMessage(fib())
-
+fib();
 function fib() {
 
     let bhk_count = [0, 0, 0, 0, 1, 0];
@@ -129,15 +127,20 @@ function fib() {
                     return property_details;
 
                 })
-                // console.log(page_prop)
-
-                array = page_prop
-                var d = new Date();
+               //  console.log(page_prop)
+                
+              if(page_prop.length!=0)  array = page_prop
+              //console.log(array)  
+              var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
                     console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
                     console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                }
+                if(array.length!=0) {
+                    
+                    parentPort.postMessage(array)
                 }
 
                 await browser.close();
@@ -148,7 +151,8 @@ function fib() {
         }
 
     }
-    return array.length
+   
+  
 
 
 
